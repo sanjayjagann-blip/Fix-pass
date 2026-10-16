@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FixPass | Trusted home repairs. One simple monthly pass.</title>
+<meta name="description" content="FixPass gives your home unlimited routine repairs by background-verified technicians for one predictable monthly subscription." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --primary: #0051aa;
+    --primary-btn: #1769d2;
+    --navy: #102f55;
+    --ink: #0a1c30;
+    --body: #424753;
+    --muted: #727784;
+    --bg: #f8f9ff;
+    --bg-alt: #eff4ff;
+    --pill: #dbe9ff;
+    --line: rgba(210, 228, 255, 0.6);
+    --danger: #ba1a1a;
+    --success: #059669;
+    --radius-card: 16px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    color: var(--body);
+    background: var(--bg);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 { font-family: 'Manrope', 'Inter', sans-serif; color: var(--ink); }
+  a { color: inherit; text-decoration: none; }
+  img { max-width: 100%; display: block; }
+  svg.i { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0; }
+  button { font: inherit; cursor: pointer; border: 0; background: none; }
+
+  .container { width: 100%; max-width: 1280px; margin: 0 auto; padding: 0 48px; }
+  .section { padding: 80px 0; }
+  .eyebrow {
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: 0.7px; text-transform: uppercase; color: var(--primary);
+    line-height: 20px; text-align: center;
+  }
+  .section-head { max-width: 672px; margin: 0 auto 64px; text-align: center; display: flex; flex-direction: column; gap: 8px; }
+  .section-head h2 { font-weight: 700; font-size: 40px; line-height: 48px; letter-spacing: -0.6px; }
+  .section-head p { font-size: 18px; line-height: 28px; padding-top: 8px; }
+
+  /* Buttons & pills */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    border-radius: 8px; font-family: 'Inter', sans-serif; font-weight: 600; font-size: 14px;
+    letter-spacing: 0.14px; padding: 14px 24px; transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    white-space: nowrap;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn-primary { background: var(--primary-btn); color: #fff; box-shadow: 0 10px 15px -3px rgba(23,105,210,.3), 0 4px 6px -4px rgba(23,105,210,.3); }
+  .btn-primary:hover { background: #1560bd; }
+  .btn-primary:disabled { opacity: .7; cursor: wait; transform: none; }
+  .btn-wa { background: var(--success); color: #fff; }
+  .btn-soft { background: #e5eeff; color: var(--primary); padding: 8px 12px; font-size: 14px; }
+  .btn-dark-ghost { background: rgba(255,255,255,.1); color: #fff; }
+  .pill {
+    display: inline-flex; align-items: center; gap: 8px; border-radius: 9999px;
+    font-weight: 600; font-size: 11px; letter-spacing: .44px; padding: 4px 12px; line-height: 14px; white-space: nowrap;
+  }
+  .pill-blue { background: var(--pill); color: var(--primary); }
+  .pill-red { background: rgba(255,218,214,.4); color: var(--danger); }
+  .pill-soft { background: rgba(255,255,255,.1); color: #d7e2ff; }
+
+  /* ---------- HEADER ---------- */
+  .site-header {
+    position: sticky; top: 0; z-index: 50;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(6px);
+    box-shadow: 0 1px 8px rgba(0,0,0,.04);
+  }
+  .site-header .bar { height: 80px; display: flex; align-items: center; justify-content: space-between; }
+  .brand { display: flex; align-items: center; gap: 12px; }
+  .logo-mark {
+    width: 32px; height: 32px; border-radius: 8px; background: var(--primary-btn);
+    background-size: contain; background-repeat: no-repeat; background-position: center;
+  }
+  .brand-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 18px; color: var(--ink); letter-spacing: -.45px; }
+  .nav { display: flex; gap: 4px; }
+  .nav a { font-weight: 600; font-size: 14px; letter-spacing: .14px; padding: 8px 12px; border-radius: 8px; color: var(--body); }
+  .nav a.active { background: #e5eeff; color: var(--primary); }
+  .nav a:hover { color: var(--primary); }
+  .header-actions { display: flex; align-items: center; gap: 12px; }
+  .chip-live {
+    background: var(--bg-alt); padding: 10px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;
+    font-weight: 600; font-size: 14px; color: var(--ink); letter-spacing: .14px;
+  }
+  .dot { width: 8px; height: 8px; border-radius: 9999px; background: #10b981; display: inline-block; }
+  .btn-header { background: var(--primary-btn); color: #fff; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; box-shadow: 0 2px 4px rgba(23,105,210,.25); }
+  .avatar {
+    width: 32px; height: 32px; border-radius: 9999px; margin-left: 9px; padding-left: 0;
+    background: #c9d8ee center/cover no-repeat; box-shadow: 0 0 0 2px rgba(23,105,210,.2);
+    background-image: url('assets/profile.png');
+  }
+  .divider-left { border-left: 1px solid rgba(194,198,213,.3); padding-left: 9px; display: flex; align-items: center; }
+
+  /* ---------- HERO ---------- */
+  .hero { position: relative; overflow: hidden; background: var(--bg); padding: 80px 0; }
+  .hero-glow {
+    position: absolute; left: 50%; top: -128px; width: 900px; height: 450px; transform: translateX(-50%);
+    background: rgba(179,209,255,.2); filter: blur(32px); border-radius: 9999px; pointer-events: none;
+  }
+  .hero-grid { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 48px; align-items: center; }
+  .hero-left { grid-column: 1 / span 7; display: flex; flex-direction: column; }
+  .hero-right { grid-column: 8 / span 5; position: relative; }
+  .prelaunch { align-self: flex-start; background: rgba(179,209,255,.4); padding: 6px 14px; border-radius: 9999px; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 1px 2px rgba(0,0,0,.05); margin-bottom: 24px; }
+  .prelaunch span.t { font-weight: 500; font-size: 12px; letter-spacing: .24px; color: var(--primary); }
+  .hero h1 { font-weight: 800; font-size: 56px; line-height: 56px; letter-spacing: -1.4px; margin-bottom: 24px; }
+  .hero h1 .accent { color: var(--primary); }
+  .hero-lead { font-size: 18px; line-height: 29.25px; max-width: 576px; margin-bottom: 32px; }
+
+  .form-card {
+    background: #fff; border-radius: 12px; padding: 32px; position: relative;
+    box-shadow: 0 20px 25px -5px rgba(66,96,136,.05), 0 8px 10px -6px rgba(66,96,136,.05);
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .form-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid var(--line); padding-bottom: 17px; gap: 12px; }
+  .form-head .title { display: inline-flex; align-items: center; gap: 8px; font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 16px; color: var(--ink); }
+  .form-head .title svg { color: var(--primary); }
+  .form-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+  .field { display: flex; flex-direction: column; gap: 6px; }
+  .field label { font-weight: 500; font-size: 11px; letter-spacing: .44px; color: var(--body); }
+  .field input {
+    height: 48px; background: var(--bg); border: 1px solid transparent; border-radius: 8px;
+    padding: 0 16px; font: inherit; font-size: 16px; color: var(--ink); outline: none; width: 100%;
+    transition: border-color .15s ease, background .15s ease;
+  }
+  .field input::placeholder { color: var(--muted); }
+  .field input:focus { border-color: var(--primary-btn); background: #fff; }
+  .field input.invalid { border-color: var(--danger); }
+  .form-action { display: flex; flex-direction: column; align-items: center; gap: 8px; padding-top: 8px; }
+  .form-action .btn { width: 100%; }
+  .micro { font-weight: 600; font-size: 11px; letter-spacing: .44px; color: #4d555b; text-align: center; }
+  .form-status { font-size: 14px; text-align: center; min-height: 20px; }
+  .form-status.ok { color: var(--success); font-weight: 600; }
+  .form-status.err { color: var(--danger); font-weight: 600; }
+  .alt-row { border-top: 1px solid var(--line); padding-top: 17px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .alt-row .q { font-size: 14px; line-height: 20px; }
+  .link-chip { background: #e5eeff; color: var(--primary); padding: 8px 16px; border-radius: 8px; font-weight: 600; font-size: 12px; letter-spacing: .24px; display: inline-flex; align-items: center; gap: 8px; }
+  .trust-badges { display: flex; gap: 12px; margin-top: 24px; }
+  .trust-badge { flex: 1 1 0; background: var(--bg-alt); padding: 12px; border-radius: 8px; display: flex; align-items: center; gap: 10px; font-weight: 600; font-size: 11px; letter-spacing: .44px; color: var(--ink); }
+  .trust-badge svg { color: var(--primary); width: 16px; height: 16px; }
+
+  .visual-card {
+    background: #fff; border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 16px;
+    box-shadow: 0 25px 50px -12px rgba(66,96,136,.1); position: relative;
+  }
+  .photo {
+    border-radius: 12px; height: 384px; position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #cfe0f5 0%, #9fb8d6 55%, #5f7fa6 100%) center/cover no-repeat;
+  }
+  .photo.hero-photo { background-image: url('assets/hero-photo.png'), linear-gradient(160deg, #cfe0f5 0%, #9fb8d6 55%, #5f7fa6 100%); }
+  .photo-scrim {
+    position: absolute; inset: 0; display: flex; flex-direction: column; justify-content: flex-end; padding: 24px; gap: 4px;
+    background: linear-gradient(to top, rgba(10,28,48,.8), rgba(10,28,48,0) 60%);
+  }
+  .active-pill { align-self: flex-start; background: rgba(16,185,129,.9); color: #fff; padding: 4px 12px; border-radius: 9999px; display: inline-flex; gap: 6px; align-items: center; font-weight: 600; font-size: 11px; letter-spacing: .44px; margin-bottom: 8px; }
+  .active-pill::before { content: ''; width: 6px; height: 6px; border-radius: 9999px; background: #fff; }
+  .scrim-name { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 18px; color: #fff; line-height: 24px; }
+  .scrim-sub { font-size: 14px; color: rgba(255,255,255,.9); line-height: 20px; }
+  .metrics { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .metric { background: var(--bg-alt); border-radius: 8px; padding: 14px; height: 74px; position: relative; }
+  .metric .k { font-weight: 600; font-size: 11px; letter-spacing: .44px; color: #4d555b; }
+  .metric .v { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 22px; color: var(--ink); line-height: 28px; margin-top: 6px; }
+  .metric .v.blue { color: var(--primary); }
+  .metric .v small { font-family: 'Inter', sans-serif; font-weight: 400; font-size: 14px; color: var(--body); }
+  .float-card {
+    position: absolute; left: -24px; bottom: -24px; max-width: 320px; background: #fff; border-radius: 12px; padding: 16px;
+    display: flex; align-items: center; gap: 12px; box-shadow: 0 20px 25px -5px rgba(66,96,136,.15), 0 8px 10px -6px rgba(66,96,136,.15);
+  }
+  .float-icon { width: 40px; height: 40px; border-radius: 9999px; background: rgba(0,81,170,.1); color: var(--primary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .float-card .t { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 12px; color: var(--ink); line-height: 16px; }
+  .float-card .s { font-size: 12px; color: #4d555b; line-height: 16px; }
+
+  /* ---------- PROBLEM vs SOLUTION ---------- */
+  .problem { background: var(--bg-alt); }
+  .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: stretch; }
+  .panel {
+    background: #fff; border-radius: 16px; padding: 40px; position: relative; display: flex; flex-direction: column; overflow: hidden;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+  }
+  .panel.fixpass { box-shadow: 0 20px 25px -5px rgba(23,105,210,.1), 0 8px 10px -6px rgba(23,105,210,.1); gap: 20px; }
+  .panel-head { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #d2e4ff; padding-bottom: 17px; gap: 12px; }
+  .panel-title { display: flex; align-items: center; gap: 12px; }
+  .panel-title .ic { width: 40px; height: 40px; border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .panel-title h3 { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 18px; line-height: 24px; }
+  .ic-red { background: rgba(255,218,214,.6); color: var(--danger); }
+  .ic-blue { background: #d2e4ff; color: var(--primary); }
+  .list { display: flex; flex-direction: column; gap: 16px; margin-top: 24px; }
+  .list-item { display: flex; gap: 12px; align-items: flex-start; }
+  .list-item .mark { margin-top: 3px; flex-shrink: 0; }
+  .list-item .mark.x { color: var(--danger); }
+  .list-item .mark.ok { color: var(--primary); }
+  .list-item h4 { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 16px; line-height: 22px; color: var(--ink); }
+  .list-item p { font-size: 16px; line-height: 24px; color: var(--body); }
+  .note-box { background: rgba(219,233,255,.4); border-radius: 12px; padding: 16px; font-size: 14px; line-height: 20px; color: var(--body); margin-top: auto; }
+  .note-box.blue { background: var(--bg-alt); color: var(--primary); font-weight: 500; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; }
+  .note-box a { font-weight: 600; text-decoration: underline; color: var(--primary); }
+  .ribbon { position: absolute; right: 0; top: 0; background: var(--primary-btn); color: #fff; padding: 6px 16px; border-bottom-left-radius: 12px; font-weight: 600; font-size: 11px; letter-spacing: .44px; }
+  .panel-foot { margin-top: auto; padding-top: 32px; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 32px; }
+  .step { background: #fff; border-radius: 16px; padding: 32px; box-shadow: 0 1px 1px rgba(0,0,0,.05); display: flex; flex-direction: column; }
+  .step-num {
+    width: 56px; height: 56px; border-radius: 12px; background: var(--pill); color: var(--primary);
+    display: flex; align-items: center; justify-content: center; font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 22px; margin-bottom: 24px;
+  }
+  .step h3 { font-weight: 600; font-size: 18px; line-height: 24px; margin-bottom: 12px; }
+  .step p { font-size: 16px; line-height: 26px; }
+  .step .tag { margin-top: 24px; display: inline-flex; align-items: center; gap: 8px; font-weight: 500; font-size: 12px; letter-spacing: .24px; color: var(--primary); }
+  .step .tag svg { width: 14px; height: 14px; }
+
+  /* ---------- SERVICES ---------- */
+  .services-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 64px; flex-wrap: wrap; }
+  .services-top .txt { display: flex; flex-direction: column; gap: 8px; }
+  .services-top h2 { font-weight: 700; font-size: 40px; line-height: 48px; letter-spacing: -.6px; }
+  .services-top p { font-size: 18px; line-height: 28px; max-width: 576px; padding-top: 4px; }
+  .services-pill { background: #d2e4ff; color: var(--primary); padding: 8px 16px; border-radius: 8px; display: inline-flex; gap: 8px; align-items: center; font-weight: 600; font-size: 14px; letter-spacing: .14px; }
+  .services-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; align-items: stretch; }
+  .svc { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 1px rgba(0,0,0,.05); display: flex; flex-direction: column; gap: 32px; }
+  .svc-ic { width: 48px; height: 48px; border-radius: 12px; background: var(--pill); color: var(--primary); display: flex; align-items: center; justify-content: center; margin-bottom: 12px; }
+  .svc h3 { font-weight: 700; font-size: 18px; line-height: 24px; }
+  .svc .desc { font-size: 14px; line-height: 20px; margin-top: 8px; }
+  .svc ul { list-style: none; display: flex; flex-direction: column; gap: 10px; padding-top: 16px; }
+  .svc li { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 20px; color: var(--ink); }
+  .svc li::before { content: ''; width: 11px; height: 8px; margin-top: 6px; flex-shrink: 0; background: no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 11 8'%3E%3Cpath d='M1 4l3 3 6-6' fill='none' stroke='%230051aa' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+  .svc .foot { margin-top: auto; border-top: 1px solid var(--line); padding-top: 17px; font-weight: 600; font-size: 11px; letter-spacing: .44px; color: #4d555b; }
+
+  /* ---------- AUDIENCE ---------- */
+  .audience { background: var(--bg); }
+  .aud-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; }
+  .aud { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 1px rgba(0,0,0,.05); display: flex; flex-direction: column; justify-content: space-between; gap: 24px; }
+  .aud .photo { height: 175px; border-radius: 12px; }
+  .aud .photo.p-couple { background-image: url('assets/aud-couple.png'); }
+  .aud .photo.p-tenant { background-image: url('assets/aud-tenant.png'); }
+  .aud .photo.p-pg { background-image: url('assets/aud-pg.png'); }
+  .aud .photo.p-elder { background-image: url('assets/aud-elder.png'); }
+  .aud-body { display: flex; flex-direction: column; gap: 8px; }
+  .aud-body .tag { align-self: flex-start; background: var(--pill); color: var(--primary); padding: 4px 10px; border-radius: 4px; font-weight: 600; font-size: 11px; letter-spacing: .44px; }
+  .aud h3 { font-weight: 700; font-size: 18px; line-height: 24px; margin-top: 4px; }
+  .aud p { font-size: 16px; line-height: 26px; }
+  .aud .foot { border-top: 1px solid var(--line); padding-top: 17px; font-weight: 600; font-size: 11px; letter-spacing: .44px; color: var(--primary); display: flex; align-items: center; gap: 8px; }
+  .aud .foot svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+  /* ---------- TRUST ---------- */
+  .trust-wrap { padding: 80px 48px; background: var(--bg); }
+  .trust-panel { background: rgba(219,233,255,.4); border-radius: 24px; padding: 56px; }
+  .trust-grid { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: center; }
+  .trust-left { display: flex; flex-direction: column; gap: 8px; }
+  .trust-left h2 { font-weight: 700; font-size: 40px; line-height: 48px; letter-spacing: -.6px; }
+  .trust-left p { font-size: 16px; line-height: 26px; padding-top: 8px; }
+  .cover { margin-top: 16px; background: #fff; border-radius: 12px; padding: 12px 16px; display: inline-flex; gap: 12px; align-items: center; align-self: flex-start; box-shadow: 0 1px 1px rgba(0,0,0,.05); }
+  .cover .amt { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 16px; color: var(--ink); line-height: 22px; }
+  .cover .sub { font-weight: 600; font-size: 11px; letter-spacing: .44px; color: #4d555b; }
+  .cover svg { color: var(--primary); }
+  .pillars { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+  .pillar { background: #fff; border-radius: 16px; padding: 24px; box-shadow: 0 1px 1px rgba(0,0,0,.05); display: flex; flex-direction: column; gap: 4px; }
+  .pillar .ic { width: 40px; height: 40px; border-radius: 8px; background: var(--pill); color: var(--primary); display: flex; align-items: center; justify-content: center; margin-bottom: 8px; }
+  .pillar h3 { font-weight: 700; font-size: 16px; line-height: 22px; }
+  .pillar p { font-size: 14px; line-height: 20px; margin-top: 8px; }
+
+  /* ---------- FAQ ---------- */
+  .faq { background: var(--bg-alt); padding: 80px 0; }
+  .faq-wrap { max-width: 896px; margin: 0 auto; padding: 0 48px; }
+  .faq-wrap .section-head { margin-bottom: 56px; }
+  .faq-list { display: flex; flex-direction: column; gap: 14px; }
+  .faq-item { background: #fff; border-radius: 12px; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,.05); }
+  .faq-q {
+    width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px; text-align: left;
+    font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 18px; line-height: 24px; color: var(--ink);
+  }
+  .faq-q .chev { transition: transform .2s ease; color: var(--body); flex-shrink: 0; }
+  .faq-item.open .faq-q .chev { transform: rotate(180deg); }
+  .faq-a { display: none; padding: 0 20px 20px; font-size: 16px; line-height: 26px; color: var(--body); }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-wrap { background: var(--bg); padding: 80px 48px; }
+  .cta { position: relative; overflow: hidden; background: #102f55; border-radius: 24px; padding: 64px; box-shadow: 0 25px 50px -12px rgba(0,0,0,.25); }
+  .cta::after {
+    content: ''; position: absolute; right: -80px; bottom: -80px; width: 384px; height: 384px; border-radius: 9999px;
+    background: rgba(23,105,210,.2); filter: blur(32px); pointer-events: none;
+  }
+  .cta-grid { position: relative; z-index: 1; display: grid; grid-template-columns: 7fr 5fr; gap: 40px; align-items: center; }
+  .cta-left { display: flex; flex-direction: column; gap: 16px; }
+  .cta h2 { color: #fff; font-weight: 700; font-size: 40px; line-height: 48px; letter-spacing: -.6px; }
+  .cta .lead { font-size: 18px; line-height: 28px; color: rgba(255,255,255,.8); max-width: 576px; }
+  .cta-actions { display: flex; flex-wrap: wrap; gap: 16px; align-items: center; padding-top: 8px; }
+  .cta-glass {
+    backdrop-filter: blur(6px); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1);
+    border-radius: 16px; padding: 25px; display: flex; flex-direction: column; gap: 16px;
+  }
+  .cta-glass .h { display: flex; gap: 8px; align-items: center; font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 16px; color: #fff; }
+  .cta-glass ul { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .cta-glass li { display: flex; gap: 10px; align-items: flex-start; font-size: 14px; line-height: 20px; color: rgba(255,255,255,.8); }
+  .cta-glass li svg { color: #d7e2ff; width: 14px; height: 14px; margin-top: 4px; flex-shrink: 0; }
+
+  /* ---------- FOOTER ---------- */
+  .site-footer { background: var(--navy); padding: 64px 0 48px; color: rgba(255,255,255,.7); }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; padding-bottom: 49px;
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .footer-brand { display: flex; flex-direction: column; gap: 16px; }
+  .footer-brand .row { display: flex; align-items: center; gap: 12px; }
+  .footer-brand .name { font-family: 'Manrope', sans-serif; font-weight: 600; font-size: 22px; color: #fff; letter-spacing: -.55px; }
+  .footer-brand .tag { font-size: 16px; color: rgba(255,255,255,.8); }
+  .footer-notice { margin-top: 8px; max-width: 448px; backdrop-filter: blur(4px); background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 17px; display: flex; gap: 10px; }
+  .footer-notice p { font-size: 14px; line-height: 22.75px; color: rgba(255,255,255,.7); }
+  .footer-notice svg { flex-shrink: 0; margin-top: 2px; }
+  .site-footer h4 { font-weight: 600; font-size: 14px; letter-spacing: .7px; text-transform: uppercase; color: #fff; margin-bottom: 12px; }
+  .site-footer ul { list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 14px; }
+  .site-footer ul a:hover { color: #fff; }
+  .site-footer ul li { display: flex; align-items: center; gap: 8px; }
+  .site-footer .trust-list li { color: rgba(255,255,255,.8); }
+  .site-footer .trust-list svg { color: #10b981; width: 14px; height: 14px; }
+  .wa-text { font-size: 14px; line-height: 22.75px; margin-bottom: 16px; }
+  .btn-footer-wa { background: rgba(5,150,105,.9); color: #fff; padding: 10px 16px; border-radius: 8px; font-weight: 600; font-size: 14px; display: inline-flex; gap: 8px; align-items: center; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; padding-top: 32px; gap: 16px; flex-wrap: wrap; }
+  .footer-bottom .copy { font-weight: 500; font-size: 12px; letter-spacing: .24px; color: rgba(255,255,255,.6); }
+  .footer-bottom nav { display: flex; gap: 24px; }
+  .footer-bottom nav a { font-weight: 500; font-size: 12px; letter-spacing: .24px; color: rgba(255,255,255,.6); }
+  .footer-bottom nav a:hover { color: #fff; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1100px) {
+    .container, .faq-wrap, .trust-wrap, .cta-wrap { padding-left: 32px; padding-right: 32px; }
+    .nav { display: none; }
+    .services-grid, .aud-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
+    .section, .faq, .hero { padding: 56px 0; }
+    .hero-grid { grid-template-columns: 1fr; gap: 40px; }
+    .hero-left, .hero-right { grid-column: auto; }
+    .hero h1 { font-size: 40px; line-height: 46px; }
+    .section-head h2, .services-top h2, .trust-left h2, .cta h2 { font-size: 30px; line-height: 38px; }
+    .compare, .steps, .trust-grid, .cta-grid { grid-template-columns: 1fr; }
+    .trust-panel, .cta { padding: 32px; }
+    .header-actions .chip-live { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .trust-badges { flex-direction: column; }
+    .float-card { left: 8px; bottom: -16px; right: 8px; max-width: none; }
+    .visual-card { margin-bottom: 24px; }
+    .photo { height: 280px; }
+    .site-header .bar { height: auto; padding: 16px 0; gap: 12px; flex-wrap: wrap; }
+  }
+  @media (max-width: 600px) {
+    .container, .faq-wrap, .trust-wrap, .cta-wrap { padding-left: 20px; padding-right: 20px; }
+    .services-grid, .aud-grid, .pillars, .footer-grid { grid-template-columns: 1fr; }
+    .form-card, .panel { padding: 24px; }
+    .btn-header { padding: 8px 14px; }
+    .section-head h2 { font-size: 26px; line-height: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Shared SVG icon sprite (inline, works offline) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8z"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M4 5h16v11H8l-4 4V5z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></symbol>
+    <symbol id="i-money" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M14.5 9.5c-.5-.8-1.4-1.2-2.5-1.2-1.4 0-2.5.7-2.5 1.7 0 2.3 5 1 5 3.3 0 1-1.1 1.7-2.5 1.7-1.2 0-2.1-.5-2.6-1.3M12 6.5v1.5M12 16v1.5"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
+    <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9.5"/></symbol>
+    <symbol id="i-x-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9 9l6 6M15 9l-6 6"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8v.01"/></symbol>
+    <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 3v5M15 3v5M7 8h10v4a5 5 0 0 1-10 0V8zM12 17v4"/></symbol>
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v9H4v-9zM10 20v-5h4v5"/></symbol>
+    <symbol id="i-tools" viewBox="0 0 24 24"><path d="M14 6l4 4-9 9-4-4 9-9zM4 20l2-2M16 4l4 4"/></symbol>
+    <symbol id="i-appliance" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><circle cx="12" cy="14" r="3.5"/><path d="M8 7h2"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path d="M7 3h7l5 5v13H7zM14 3v5h5"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><path d="M4 21V5l8-2v18M12 9h8v12M7 9h2M7 13h2M7 17h2"/></symbol>
+    <symbol id="i-broom" viewBox="0 0 24 24"><path d="M14 4l6 6M4 20l6-6 2 2-4 4H4zM10 14l3-3"/></symbol>
+    <symbol id="i-qr" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h2v2h-2zM18 14h2v6h-6v-2"/></symbol>
+    <symbol id="i-warranty" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 9 9"/><path d="M21 3v6h-6"/></symbol>
+    <symbol id="i-badge" viewBox="0 0 24 24"><circle cx="12" cy="10" r="5"/><path d="M8 15l-2 6 6-2 6 2-2-6"/></symbol>
+    <symbol id="i-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1 6.2L12 17l-5.5 2.9 1-6.2-4.5-4.4 6.2-.9z"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+  </defs>
+</svg>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="container bar">
+    <a href="#top" class="brand" aria-label="FixPass home">
+      <span class="logo-mark" style="background-image:url('assets/logo.png')"></span>
+      <span class="brand-name">FixPass</span>
+    </a>
+    <nav class="nav" aria-label="Primary">
+      <a href="#how-it-works" class="active">How It Works</a>
+      <a href="#what-we-fix">What We Fix</a>
+      <a href="#who-its-for">Who It's For</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+    <div class="header-actions">
+      <a class="chip-live" href="#whatsapp" data-whatsapp><span class="dot"></span>Chat on WhatsApp</a>
+      <a class="btn-header" href="#waitlist">Join Waitlist</a>
+      <div class="divider-left"><div class="avatar" role="img" aria-label="Profile"></div></div>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero" id="waitlist">
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+
+      <div class="hero-left">
+        <span class="prelaunch"><span class="dot" style="background:#0051aa;width:8px;height:8px"></span><span class="t">Launching Soon in Your Neighborhood • Early Access Open</span></span>
+
+        <h1>Trusted home repairs.<br /><span class="accent">One simple</span> monthly<br />pass.</h1>
+
+        <p class="hero-lead">Say goodbye to unreliable handymen, hidden charges, and endless calls. FixPass gives your home unlimited routine fixes by background-verified technicians for one predictable subscription.</p>
+
+        <form class="form-card" id="waitlistForm" novalidate>
+          <div class="form-head">
+            <div class="title"><svg class="i" viewBox="0 0 24 24"><use href="#i-bolt"/></svg>Reserve Early Priority Pass</div>
+            <span class="pill pill-blue">Cohort #1: 420/500 Claimed</span>
+          </div>
+
+          <div class="form-grid">
+            <div class="field">
+              <label for="name">Your Name</label>
+              <input id="name" name="name" type="text" placeholder="e.g. Priya Sharma" autocomplete="name" required />
+            </div>
+            <div class="field">
+              <label for="email">Email</label>
+              <input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required />
+            </div>
+            <div class="field">
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel" required />
+            </div>
+          </div>
+
+          <div class="form-action">
+            <button type="submit" class="btn btn-primary" id="submitBtn">Join Early Waitlist <svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><use href="#i-arrow"/></svg></button>
+            <p class="micro">Free early member perks • No credit card needed • Launch priority</p>
+            <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="alt-row">
+            <span class="q">Prefer direct questions?</span>
+            <a class="link-chip" href="#whatsapp" data-whatsapp><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><use href="#i-chat"/></svg>Chat with our team on WhatsApp</a>
+          </div>
+        </form>
+
+        <div class="trust-badges">
+          <div class="trust-badge"><svg class="i" viewBox="0 0 24 24"><use href="#i-shield"/></svg>100% Background-Checked</div>
+          <div class="trust-badge"><svg class="i" viewBox="0 0 24 24"><use href="#i-money"/></svg>Zero Hidden Visit Fees</div>
+          <div class="trust-badge"><svg class="i" viewBox="0 0 24 24"><use href="#i-clock"/></svg>Guaranteed 24-Hr Response</div>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="visual-card">
+          <div class="photo hero-photo" role="img" aria-label="Verified FixPass technician at work in a home">
+            <div class="photo-scrim">
+              <span class="active-pill">Active Pass Member #FP-2094</span>
+              <div class="scrim-name">Ramesh K. • Senior Electrician</div>
+              <div class="scrim-sub">Identity Verified • Police Checked • 4.9★ (340+ fixes)</div>
+            </div>
+          </div>
+          <div class="metrics">
+            <div class="metric">
+              <div class="k">Standard Visit Fee</div>
+              <div class="v">₹0 <small>/ unlimited</small></div>
+            </div>
+            <div class="metric">
+              <div class="k">Satisfaction SLA</div>
+              <div class="v blue">30 Days <small>re-fix free</small></div>
+            </div>
+          </div>
+        </div>
+        <div class="float-card">
+          <div class="float-icon"><svg class="i" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg></div>
+          <div>
+            <div class="t">1-Click WhatsApp Booking</div>
+            <div class="s">No app install required for seniors</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROBLEM VS SOLUTION ============ -->
+<section class="section problem" id="problem">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">The Maintenance Dilemma</span>
+      <h2>Home maintenance shouldn't be a gamble</h2>
+      <p>See how switching to FixPass transforms the frustrating chore of home repairs into seamless certainty.</p>
+    </div>
+
+    <div class="compare">
+      <div class="panel">
+        <div class="panel-head">
+          <div class="panel-title">
+            <span class="ic ic-red"><svg class="i" viewBox="0 0 24 24"><use href="#i-x-circle"/></svg></span>
+            <h3>The Traditional Headache</h3>
+          </div>
+          <span class="pill pill-red">Unpredictable</span>
+        </div>
+        <div class="list">
+          <div class="list-item"><span class="mark x"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><use href="#i-x"/></svg></span><div><h4>Unverified, Random Handymen</h4><p>Stranger safety risks, zero verified identity or criminal record screening.</p></div></div>
+          <div class="list-item"><span class="mark x"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><use href="#i-x"/></svg></span><div><h4>Sudden &amp; Arbitrary Overcharging</h4><p>₹500 inspection fee just to show up, plus inflated quotes for simple 10-minute tasks.</p></div></div>
+          <div class="list-item"><span class="mark x"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><use href="#i-x"/></svg></span><div><h4>Endless Follow-Ups &amp; Delays</h4><p>"Will come at 11 AM", turns up at 7 PM or cancels entirely after you stayed home.</p></div></div>
+          <div class="list-item"><span class="mark x"><svg class="i" viewBox="0 0 24 24" style="width:12px;height:12px"><use href="#i-x"/></svg></span><div><h4>Zero Accountability If It Breaks Again</h4><p>Technician blocks your number the next morning when the repaired pipe leaks.</p></div></div>
+        </div>
+        <div class="panel-foot">
+          <div class="note-box">Constant negotiation and anxiety, particularly tough on seniors and dual-income couples.</div>
+        </div>
+      </div>
+
+      <div class="panel fixpass">
+        <span class="ribbon">RECOMMENDED STANDARD</span>
+        <div class="panel-head">
+          <div class="panel-title">
+            <span class="ic ic-blue"><svg class="i" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg></span>
+            <h3>The FixPass Experience</h3>
+          </div>
+          <span class="pill pill-blue">Guaranteed</span>
+        </div>
+        <div class="list">
+          <div class="list-item"><span class="mark ok"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><use href="#i-check-circle"/></svg></span><div><h4>Police-Verified &amp; Certified Pros</h4><p>Trained company technicians with biometric ID badges and standardized attire.</p></div></div>
+          <div class="list-item"><span class="mark ok"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><use href="#i-check-circle"/></svg></span><div><h4>Flat-Rate Subscription Coverage</h4><p>₹0 visit charges, ₹0 diagnosis fees. Unlimited routine labor included in your pass.</p></div></div>
+          <div class="list-item"><span class="mark ok"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><use href="#i-check-circle"/></svg></span><div><h4>Strict Time Slots via WhatsApp</h4><p>Dispatch tracking, punctual arrivals, and real-time technician updates on your phone.</p></div></div>
+          <div class="list-item"><span class="mark ok"><svg class="i" viewBox="0 0 24 24" style="width:14px;height:14px"><use href="#i-check-circle"/></svg></span><div><h4>30-Day FixPass SLA Guarantee</h4><p>If the same repair fails within 30 days, we fix it immediately at zero cost.</p></div></div>
+        </div>
+        <div class="panel-foot">
+          <div class="note-box blue"><span>Peace of mind starts with your first scheduled month.</span><a href="#pricing">View Plans →</a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section class="section" id="how-it-works">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Friction-Free Process</span>
+      <h2>How FixPass works</h2>
+      <p>No complex agreements, no lengthy estimate calls. Just high-grade home care on demand.</p>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h3>Choose Your Plan</h3>
+        <p>Subscribe to an affordable monthly or annual pass tailored to your home layout (1 BHK to multi-story bungalows).</p>
+        <span class="tag"><svg class="i" viewBox="0 0 24 24"><use href="#i-calendar"/></svg>Flexible pause or cancel anytime</span>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h3>Request a Fix in Seconds</h3>
+        <p>Send a voice note or photo on WhatsApp, or raise a 1-click web request whenever a pipe leaks, a fan sparks, or a latch loosens.</p>
+        <span class="tag"><svg class="i" viewBox="0 0 24 24"><use href="#i-chat"/></svg>Average booking time: 45 seconds</span>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h3>Verified Pro Arrives</h3>
+        <p>A uniformed, certified technician arrives in your preferred slot, resolves the fault cleanly, and charges ₹0 inspection fee.</p>
+        <span class="tag"><svg class="i" viewBox="0 0 24 24"><use href="#i-check-circle"/></svg>Zero mess cleanup guarantee</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ WHAT WE FIX ============ -->
+<section class="section" id="what-we-fix" style="background:var(--bg-alt)">
+  <div class="container">
+    <div class="services-top">
+      <div class="txt">
+        <span class="eyebrow" style="text-align:left">Coverage Scope</span>
+        <h2>Comprehensive repair coverage</h2>
+        <p>Every common domestic friction point handled by qualified specialists under your plan.</p>
+      </div>
+      <div class="services-pill"><svg class="i" viewBox="0 0 24 24" style="width:20px;height:20px"><use href="#i-info"/></svg>Routine wear-and-tear covered with ₹0 visit fee!</div>
+    </div>
+
+    <div class="services-grid">
+      <div class="svc">
+        <div>
+          <div class="svc-ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-plug"/></svg></div>
+          <h3>Electrical Fixes</h3>
+          <p class="desc">Safe handling of high and low voltage home fixtures.</p>
+          <ul>
+            <li>Switchboards &amp; faulty sockets</li>
+            <li>Ceiling &amp; exhaust fan repairs</li>
+            <li>Tripping MCB &amp; fuse diagnostics</li>
+            <li>Light fittings &amp; chandelier install</li>
+            <li>Inverter circuit troubleshooting</li>
+          </ul>
+        </div>
+        <div class="foot">Included in all tiers</div>
+      </div>
+
+      <div class="svc">
+        <div>
+          <div class="svc-ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-home"/></svg></div>
+          <h3>Plumbing Care</h3>
+          <p class="desc">Swift fixes before water damage threatens your walls.</p>
+          <ul>
+            <li>Dripping taps &amp; mixer showers</li>
+            <li>Concealed pipe leakage isolation</li>
+            <li>Flush tanks &amp; health faucet valves</li>
+            <li>Sink &amp; drain clog clearing</li>
+            <li>RO &amp; geyser pipe connections</li>
+          </ul>
+        </div>
+        <div class="foot">Included in all tiers</div>
+      </div>
+
+      <div class="svc">
+        <div>
+          <div class="svc-ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-tools"/></svg></div>
+          <h3>Carpentry &amp; Mounts</h3>
+          <p class="desc">Precision carpentry and secure wall fixture mountings.</p>
+          <ul>
+            <li>Main door locks &amp; deadbolts</li>
+            <li>Sagging cabinet doors &amp; hinges</li>
+            <li>Curtain rods &amp; wall hangings</li>
+            <li>Floating shelves &amp; TV mounts</li>
+            <li>Minor wooden furniture tightening</li>
+          </ul>
+        </div>
+        <div class="foot">Included in all tiers</div>
+      </div>
+
+      <div class="svc">
+        <div>
+          <div class="svc-ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-appliance"/></svg></div>
+          <h3>Appliance First-Aid</h3>
+          <p class="desc">Rapid diagnostics before expensive branded calls.</p>
+          <ul>
+            <li>AC filter cleaning &amp; gas checks</li>
+            <li>Washing machine inlet unclogging</li>
+            <li>Water heater (geyser) scaling check</li>
+            <li>Microwave socket power verification</li>
+            <li>OEM warranty escort assistance</li>
+          </ul>
+        </div>
+        <div class="foot">Primary diagnostics included</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AUDIENCE ============ -->
+<section class="section audience" id="who-its-for">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Who It's For</span>
+      <h2>Built for real everyday lives</h2>
+      <p>Designed thoughtfully around the specific frustrations of modern urban households.</p>
+    </div>
+
+    <div class="aud-grid">
+      <article class="aud">
+        <div class="aud-body" style="gap:0">
+          <div class="photo p-couple" role="img" aria-label="Working couple at home"></div>
+        </div>
+        <div class="aud-body">
+          <span class="tag">Zero Leave Taken</span>
+          <h3>Working Couples</h3>
+          <p>Weekend chores saved. Schedule repairs early morning or post-work hours without wasting paid time off.</p>
+        </div>
+        <div class="foot"><svg viewBox="0 0 24 24" class="i"><use href="#i-clock"/></svg>Late 7:00 PM - 9:00 PM slots</div>
+      </article>
+
+      <article class="aud">
+        <div class="aud-body" style="gap:0">
+          <div class="photo p-tenant" role="img" aria-label="Tenant and FixPass technician"></div>
+        </div>
+        <div class="aud-body">
+          <span class="tag">Landlord-Friendly</span>
+          <h3>Tenants &amp; Renters</h3>
+          <p>Move in with peace of mind. Resolve everyday wear-and-tear easily without endless arguments over petty reimbursement.</p>
+        </div>
+        <div class="foot"><svg viewBox="0 0 24 24" class="i"><use href="#i-doc"/></svg>Digital service logs for deposits</div>
+      </article>
+
+      <article class="aud">
+        <div class="aud-body" style="gap:0">
+          <div class="photo p-pg" role="img" aria-label="PG and hostel operator with technician"></div>
+        </div>
+        <div class="aud-body">
+          <span class="tag">Multi-Room Efficiency</span>
+          <h3>PG &amp; Hostel Owners</h3>
+          <p>Keep multiple rooms running smoothly with bundled facility visits. Zero student complaints regarding broken geysers or taps.</p>
+        </div>
+        <div class="foot"><svg viewBox="0 0 24 24" class="i"><use href="#i-building"/></svg>Batch room resolution days</div>
+      </article>
+
+      <article class="aud">
+        <div class="aud-body" style="gap:0">
+          <div class="photo p-elder" role="img" aria-label="Elderly resident with FixPass technician"></div>
+        </div>
+        <div class="aud-body">
+          <span class="tag">Total Family Safety</span>
+          <h3>Elderly Living Alone</h3>
+          <p>Safe, polite, and vetted technicians you can trust inside the home. Children can track visits remotely via WhatsApp alerts.</p>
+        </div>
+        <div class="foot"><svg viewBox="0 0 24 24" class="i"><use href="#i-shield"/></svg>Emergency family WhatsApp ping</div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRUST & SAFETY ============ -->
+<section class="trust-wrap" id="trust">
+  <div class="trust-panel">
+    <div class="trust-grid">
+      <div class="trust-left">
+        <span class="eyebrow" style="text-align:left">Uncompromised Security</span>
+        <h2>Your home's safety is our ultimate benchmark.</h2>
+        <p>We never crowdsource untracked daily-wage gig workers. Every technician who steps into your living room is on the payroll, strictly vetted, and covered under FixPass comprehensive insurance.</p>
+        <div class="cover">
+          <svg class="i" viewBox="0 0 24 24" style="width:16px;height:20px"><use href="#i-shield"/></svg>
+          <div>
+            <div class="amt">₹10 Lakh Cover</div>
+            <div class="sub">Domestic property accidental insurance</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pillars">
+        <div class="pillar">
+          <div class="ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-badge"/></svg></div>
+          <h3>Police &amp; Biometric Vetting</h3>
+          <p>Independent criminal history verification &amp; Aadhaar biometric checks prior to onboarding.</p>
+        </div>
+        <div class="pillar">
+          <div class="ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-qr"/></svg></div>
+          <h3>Real-Time Digital Badge</h3>
+          <p>Scan the technician's QR ID card at your door to confirm their authorization before letting them in.</p>
+        </div>
+        <div class="pillar">
+          <div class="ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-broom"/></svg></div>
+          <h3>Clean-Workspace Mandate</h3>
+          <p>Technicians carry drop cloths, boot covers, and mini vacuums. We leave zero debris behind.</p>
+        </div>
+        <div class="pillar">
+          <div class="ic"><svg class="i" viewBox="0 0 24 24"><use href="#i-warranty"/></svg></div>
+          <h3>30-Day Fix Warranty</h3>
+          <p>If a serviced appliance or faucet leaks again, technician revisit and re-fix is completely complimentary.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <div class="faq-wrap">
+    <div class="section-head">
+      <span class="eyebrow">Clear Answers</span>
+      <h2>Frequently asked questions</h2>
+      <p>Everything you need to know about our upcoming neighborhood launch.</p>
+    </div>
+
+    <div class="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">When does FixPass officially launch in my area?<svg class="i chev" viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#i-chev"/></svg></button>
+        <div class="faq-a">We are launching neighborhood by neighborhood. Join the waitlist with your locality in mind and we will confirm your area's start date on WhatsApp.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Are replacement spare parts included in the subscription?<svg class="i chev" viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#i-chev"/></svg></button>
+        <div class="faq-a">Labour and visits are covered by your pass. Spare parts are billed transparently at the quoted rate, with no markup on the part itself.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">How quickly does a technician arrive after I raise a request?<svg class="i chev" viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#i-chev"/></svg></button>
+        <div class="faq-a">Requests are matched to a verified technician and confirmed on WhatsApp with a time slot. Our target is a guaranteed response within 24 hours.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Can I pause or cancel my subscription at any time?<svg class="i chev" viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#i-chev"/></svg></button>
+        <div class="faq-a">Yes. You can pause or cancel anytime. There are no lock-in penalties on the monthly plan.</div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">Is FixPass available for commercial spaces or just homes?<svg class="i chev" viewBox="0 0 24 24" style="width:16px;height:16px"><use href="#i-chev"/></svg></button>
+        <div class="faq-a">The current pass is built for homes, including PG and hostel operators managing multiple rooms. Commercial offices are not part of the launch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA BANNER ============ -->
+<section class="cta-wrap">
+  <div class="cta">
+    <div class="cta-grid">
+      <div class="cta-left">
+        <span class="pill pill-soft" style="align-self:flex-start">Limited to First 500 Subscriptions</span>
+        <h2>Be the first in your neighborhood to experience stress-free home care.</h2>
+        <p class="lead">Skip the repair hassle forever. Lock in foundational pricing and unlock 2 free months before public registrations open.</p>
+        <div class="cta-actions">
+          <a class="btn btn-primary" href="#waitlist">Claim Waitlist Spot</a>
+          <a class="btn btn-dark-ghost" href="#whatsapp" data-whatsapp><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><use href="#i-chat"/></svg>Chat via WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="cta-glass">
+        <div class="h"><svg class="i" viewBox="0 0 24 24" style="width:22px;height:22px;color:#d7e2ff"><use href="#i-warranty"/></svg>Early Access Guarantees</div>
+        <ul>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg>Lifetime rate lock on your base plan tier</li>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg>First priority on weekend repair time slots</li>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg>Complimentary initial Home Wiring &amp; Plumbing Audit</li>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-check"/></svg>Direct WhatsApp concierge hotline access</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="row">
+          <span class="logo-mark" style="background-image:url('assets/logo.png')"></span>
+          <span class="name">FixPass</span>
+        </div>
+        <div class="tag">Trusted fixes. One simple plan.</div>
+        <div class="footer-notice">
+          <svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><use href="#i-info"/></svg>
+          <p>FixPass is currently preparing to launch in select neighborhoods. Sign up to get early invite perks and priority technician visits.</p>
+        </div>
+      </div>
+
+      <div>
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#what-we-fix">What We Fix</a></li>
+          <li><a href="#who-its-for">Who It's For</a></li>
+          <li><a href="#faq">FAQ &amp; Coverage</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>WhatsApp Direct</h4>
+        <p class="wa-text">Have urgent questions about your area's rollout? Speak directly with our neighborhood dispatch leads.</p>
+        <a class="btn-footer-wa" href="#whatsapp" data-whatsapp><svg class="i" viewBox="0 0 24 24" style="width:15px;height:15px"><use href="#i-chat"/></svg>Chat with Support</a>
+      </div>
+
+      <div>
+        <h4>Trust &amp; Standards</h4>
+        <ul class="trust-list">
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-shield"/></svg>Verified Technicians</li>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-badge"/></svg>100% Background Checked</li>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-doc"/></svg>Transparent Pricing</li>
+          <li><svg class="i" viewBox="0 0 24 24"><use href="#i-warranty"/></svg>FixPass SLA Guarantee</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="copy">© 2025 FixPass Home Technologies Inc. All rights reserved.</div>
+      <nav aria-label="Legal">
+        <a href="#">Terms of Service</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Acceptable Use</a>
+      </nav>
+    </div>
+  </div>
+</footer>
+
+<script>
+  /* ---------- CONFIG ---------- */
+  // Deployed Google Apps Script web app (Code.gs) that appends rows to the "Responses" tab.
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyGuP7D2vPC7mbBmEigSC1xi11UHWt6q20oshYy-UnaAcLLlskrXUj3ZmogYFlm8dNXwA/exec";
+  // Set this to the WhatsApp business number (international format, digits only), e.g. "919XXXXXXXXX".
+  const WHATSAPP_NUMBER = "";
+  const WHATSAPP_MESSAGE = "Hi FixPass, I'd like to know more about the early waitlist.";
+
+  /* ---------- WHATSAPP LINKS ---------- */
+  document.querySelectorAll('[data-whatsapp]').forEach(function (el) {
+    if (!WHATSAPP_NUMBER) return; // leave as in-page anchor until a number is configured
+    el.setAttribute('href', 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(WHATSAPP_MESSAGE));
+    el.setAttribute('target', '_blank');
+    el.setAttribute('rel', 'noopener');
+  });
+
+  /* ---------- FAQ ACCORDION ---------- */
+  document.querySelectorAll('.faq-item').forEach(function (item) {
+    var btn = item.querySelector('.faq-q');
+    btn.addEventListener('click', function () {
+      var open = item.classList.toggle('open');
+      btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+  });
+
+  /* ---------- WAITLIST FORM -> GOOGLE SHEETS ---------- */
+  var form = document.getElementById('waitlistForm');
+  var submitBtn = document.getElementById('submitBtn');
+  var statusEl = document.getElementById('formStatus');
+  var nameInput = document.getElementById('name');
+  var emailInput = document.getElementById('email');
+  var phoneInput = document.getElementById('phone');
+
+  function setStatus(msg, type) {
+    statusEl.textContent = msg;
+    statusEl.className = 'form-status' + (type ? ' ' + type : '');
+  }
+
+  function showSuccess() {
+    setStatus("You're on the list! We'll reach out on WhatsApp soon.", 'ok');
+    form.reset();
+    submitBtn.disabled = false;
+    submitBtn.firstChild.textContent = 'Join Early Waitlist ';
+  }
+
+  function showError() {
+    setStatus('Something went wrong. Please try again in a moment.', 'err');
+    submitBtn.disabled = false;
+    submitBtn.firstChild.textContent = 'Join Early Waitlist ';
+  }
+
+  function validate() {
+    var ok = true;
+    [nameInput, emailInput, phoneInput].forEach(function (input) {
+      var valid = input.value.trim().length > 0;
+      if (input === emailInput && valid) valid = /^\S+@\S+\.\S+$/.test(input.value.trim());
+      input.classList.toggle('invalid', !valid);
+      if (!valid) ok = false;
+    });
+    return ok;
+  }
+
+  [nameInput, emailInput, phoneInput].forEach(function (input) {
+    input.addEventListener('input', function () { input.classList.remove('invalid'); });
+  });
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    if (!validate()) {
+      setStatus('Please fill in your name, a valid email and your phone number.', 'err');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.firstChild.textContent = 'Submitting… ';
+    setStatus('');
+
+    var url = SCRIPT_URL + "?" + new URLSearchParams({
+      name: nameInput.value.trim(),
+      email: emailInput.value.trim(),
+      phone: phoneInput.value.trim()
+    });
+
+    fetch(url, { method: "GET", mode: "no-cors" })
+      .then(() => showSuccess())
+      .catch(() => showError());
+  });
+</script>
+</body>
+</html>
